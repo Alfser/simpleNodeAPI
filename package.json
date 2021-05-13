@@ -1,0 +1,23 @@
+{
+  "name": "basic_api",
+  "version": "1.0.0",
+  "description": "just a simple api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "simple_api"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "simple"
+  ],
+  "author": "janilson serra",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
