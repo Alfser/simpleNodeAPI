@@ -2,6 +2,8 @@ const { response } = require('express')
 const express = require('express')
 
 var app = express()
+app.use(express.json()) //for parsing a json in the body
+// app.use(express.urlencoded({extended:true})) // for parsing application/x-www-form-urlencoded
 
 // temporary database
 var products = [{
@@ -9,7 +11,24 @@ var products = [{
     productName:"Smart phone ASUS",
     price:400.00,
     description:"Basic smart phone, 2Gb RAM, 32Gb of Memory."
+},{
+    id:2,
+    productName:"Xaiome Note 9",
+    price:1200.00,
+    description:"Basic smart phone, 3Gb RAM, 64Gb of Memory."
+},{
+    id:3,
+    productName:"Notebook Acer Aspire 5",
+    price:2000.00,
+    description:"Intel i5 3.5 GHz, 8Gb RAM, 1Tb of HDD."
+},{
+    id:4,
+    productName:"Notebook Positivo",
+    price:1400.00,
+    description:"Intel i3 2.5 GHz, 8Gb RAM, 500Gb of HDD."
 }]
+
+
 
 app.get('/products', function(req, res){ 
     res.json(products)
@@ -38,18 +57,25 @@ app.get('/products/product', (req, res) =>{
 
 app.post('/products/product', (req, res)=>{
     let product = req.body
-    res.json(product)
-    /*
-    if(!product){
+    
+
+    if(!product){   
         res.status(404)
         res.json({message:"Product need to be send at this request."})    
         return;
     }
-        
-    products.concat(product)
+    
+    if(products.find(prod => prod.productName===product.productName)){
+        res.status(400)
+        res.json({err:"Product already recorded"})
+        return;
+    }
+
+    products.push(product)
     res.status(201)
     res.json(product)
-    */
+    console.log('Body:', product)
+    
 });
 
 var port = 3000
