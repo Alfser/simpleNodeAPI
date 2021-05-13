@@ -18,6 +18,38 @@ var products = [{
     productName:"Notebook Positivo",
     price:1400.00,
     description:"Intel i3 2.5 GHz, 8Gb RAM, 500Gb of HDD."
-}]
+}];
 
-module.exports = products
+
+class Product{
+
+    static #base
+
+    constructor(id, productName, price, description){
+        this.id=id
+        this.productName=productName
+        this.price = price
+        this.description = description
+    }
+
+    static getAll(){
+        return this.#base
+    }
+
+    static add(product){
+        this.#base.push(product)
+    }
+
+    static get base(){
+        return this.#base 
+    }
+
+    static set base(base){
+        this.#base =  base
+    }
+}
+
+// adding default datas
+Product.base = products
+
+module.exports = Product
